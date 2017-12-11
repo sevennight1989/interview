@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="main_ui_item">
+        <item>自定义ViewGroup</item>
+        <item>IOC框架</item>
+    </string-array>
+</resources>
