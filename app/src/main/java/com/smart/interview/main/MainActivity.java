@@ -84,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
             holder.itemTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    switch (position){
+                        case 0:
+                            Intent intent = new Intent(MainActivity.this,CustViewGroupActivity.class);
+                            startActivity(intent);
+                            break;
+                    }
                     //启动外部应用
 //                    String packageName = "";
 //                    if(position == 0) {
@@ -116,4 +122,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }
