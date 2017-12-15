@@ -1,6 +1,7 @@
 package com.smart.interview.main;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setTitle(mTitle);
         mAdapter = new ItemListAdapter();
-        mRV.setLayoutManager(new GridLayoutManager(this,3));
+        mRV.setLayoutManager(new GridLayoutManager(this, 3));
         mRV.setAdapter(mAdapter);
         setSliderShow();
     }
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private void setSliderShow() {
         int[] imgs = new int[]{R.drawable.img_001, R.drawable.img_002, R.drawable.img_003, R.drawable.img_004};
         String[] sliderText = getResources().getStringArray(R.array.slider_text);
-        for(int i=0;i<imgs.length;i++){
+        for (int i = 0; i < imgs.length; i++) {
             TextSliderView textSliderView = new TextSliderView(this);
             textSliderView.description(sliderText[i]).image(imgs[i]).setScaleType(BaseSliderView.ScaleType.Fit);
             mSlider.addSlider(textSliderView);
@@ -84,13 +85,16 @@ public class MainActivity extends AppCompatActivity {
             holder.itemTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    switch (position){
+                    switch (position) {
                         case 0:
                             Intent intent = new Intent(MainActivity.this,CustViewGroupActivity.class);
                             startActivity(intent);
                             break;
+
+                        case 1:
+                            break;
                     }
-                    //启动外部应用
+                    //启动外部应用,等同于应用安装完成后点击打开按钮启动应用
 //                    String packageName = "";
 //                    if(position == 0) {
 //                        packageName = "com.etop.vincode";

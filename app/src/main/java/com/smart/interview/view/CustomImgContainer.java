@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.smart.interview.utils.MathUtils;
+
 /**
  * Created by lenovo on 17-12-12.
  * View内部包含四个子viw,分别在矩形的四个边角
@@ -81,14 +83,18 @@ public class CustomImgContainer extends ViewGroup {
             }
 
         }
-        width = Math.max(tWidth, bWidth);
-        width = Math.max(width, pWidth);
-        width = Math.max(width, qWidth);
-        height = Math.max(lHeight, rHeight);
+        try {
+            width = MathUtils.getMax(tWidth, bWidth, pWidth, qWidth);
+            height = MathUtils.getMax(lHeight, rHeight);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         setMeasuredDimension((widthMode == MeasureSpec.EXACTLY) ? sizeWidth : width,
                 (heightMode == MeasureSpec.EXACTLY) ? sizeHeight : height);
 
     }
+
+
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
