@@ -3,6 +3,7 @@
     package="com.smart.interview">
 
     <application
+        android:name=".InitApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,7 +24,16 @@
         </activity-alias>
 
         <activity android:name=".main.MainActivity" />
-        <activity android:name=".FilterActivity"></activity>
+        <activity android:name=".FilterActivity" />
+        <activity android:name=".main.CustViewGroupActivity">
+            <!--其他应用通过uri唤起-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="content" android:host="groupview"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

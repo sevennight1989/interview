@@ -4,4 +4,11 @@
         <item>自定义ViewGroup</item>
         <item>IOC框架</item>
     </string-array>
+
+    <string-array name="slider_text">
+        <item>页面1</item>
+        <item>页面2</item>
+        <item>页面3</item>
+        <item>页面4</item>
+    </string-array>
 </resources>
