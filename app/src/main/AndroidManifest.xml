@@ -16,22 +16,34 @@
         <activity-alias
             android:name="com.smart.welcome"
             android:targetActivity=".SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity-alias>
 
         <activity android:name=".main.MainActivity" />
         <activity android:name=".FilterActivity" />
         <activity android:name=".main.CustViewGroupActivity">
-            <!--其他应用通过uri唤起-->
+
+            <!-- 其他应用通过uri唤起 -->
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:scheme="content" android:host="groupview"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="groupview"
+                    android:scheme="content" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ExpandRecyclerViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
