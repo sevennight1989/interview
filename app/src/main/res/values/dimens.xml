@@ -5,4 +5,5 @@
     <dimen name="main_ui_list_item_padding">5dp</dimen>
     <dimen name="slider_width">406dp</dimen>
     <dimen name="slider_height">234dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
