@@ -18,6 +18,11 @@ public class CustViewGroupActivity extends BaseActivity {
     }
 
     @Override
+    public boolean showActionBar() {
+        return true;
+    }
+
+    @Override
     public int layoutID() {
         return R.layout.activity_cust_view_group;
     }

@@ -18,15 +18,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(layoutID());
         ButterKnife.bind(this);
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();{
+        }
         if(actionBar != null){
-            actionBar.setTitle(title());
-            if(showBackArrow()){
-                actionBar.setDisplayHomeAsUpEnabled(true);
-                actionBar.setDisplayShowHomeEnabled(true);
+            if (!showActionBar()) {
+                actionBar.hide();
+            } else {
+                actionBar.setTitle(title());
+                if (showBackArrow()) {
+                    actionBar.setDisplayHomeAsUpEnabled(true);
+                    actionBar.setDisplayShowHomeEnabled(true);
+                }
             }
+
         }
     }
+
+    public abstract boolean showActionBar();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

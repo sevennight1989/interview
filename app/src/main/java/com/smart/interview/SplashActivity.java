@@ -9,7 +9,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     @BindView(R.id.splash_content)
     TextView mContentTv;
@@ -23,10 +23,28 @@ public class SplashActivity extends AppCompatActivity {
             finish();
             return;
         }
-        setContentView(R.layout.activity_splash);
-        ButterKnife.bind(this);
         mCountDownTimer.start();
 
+    }
+
+    @Override
+    public boolean showActionBar() {
+        return false;
+    }
+
+    @Override
+    public int layoutID() {
+        return R.layout.activity_splash;
+    }
+
+    @Override
+    public String title() {
+        return "";
+    }
+
+    @Override
+    public boolean showBackArrow() {
+        return false;
     }
 
     private CountDownTimer mCountDownTimer = new CountDownTimer(DELAY * 1000, 1000) {
