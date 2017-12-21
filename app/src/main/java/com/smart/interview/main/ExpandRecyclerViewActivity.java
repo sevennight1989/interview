@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.smart.interview.view.PartView;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -29,7 +30,8 @@ public class ExpandRecyclerViewActivity extends AppCompatActivity {
     String[] status;
     MyAdapter myAdapter;
     private static final int SIZE = 16;
-
+    @BindString(R.string.expand_recycleView)
+    String mTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
