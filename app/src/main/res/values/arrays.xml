@@ -3,6 +3,7 @@
     <string-array name="main_ui_item">
         <item>自定义ViewGroup</item>
         <item>IOC框架</item>
+        <item>ExpandRecycleView</item>
     </string-array>
 
     <string-array name="slider_text">

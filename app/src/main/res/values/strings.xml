@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Interview</string>
     <string name="item_list">栏目列表</string>
+    <string name="expand_recycleView">ExpandRecycleView</string>
+    <string name="cust_view_group">自定义ViewGroup</string>
+    <string name="title_activity_base">BaseActivity</string>
 </resources>

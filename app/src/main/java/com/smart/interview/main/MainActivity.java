@@ -1,20 +1,16 @@
 package com.smart.interview.main;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.ConvertUtils;
-import com.blankj.utilcode.util.ScreenUtils;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -85,21 +81,29 @@ public class MainActivity extends AppCompatActivity {
             holder.itemTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent = null;
                     switch (position) {
                         case 0:
-                            Intent intent = new Intent(MainActivity.this,CustViewGroupActivity.class);
-                            startActivity(intent);
+                            intent = new Intent(MainActivity.this,CustViewGroupActivity.class);
+
                             break;
 
                         case 1:
                             break;
+
+                        case 2:
+                            intent = new Intent(MainActivity.this, ExpandRecyclerViewActivity.class);
+                            break;
                     }
+                    if(intent != null){
+                        startActivity(intent);
+                    }
+
+
                     //启动外部应用,等同于应用安装完成后点击打开按钮启动应用
 //                    String packageName = "";
 //                    if(position == 0) {
 //                        packageName = "com.etop.vincode";
-//                    }else if(position == 1){
-//                        packageName = "com.pingan.carloan.amsp";
 //                    }
 //                    Intent intent = getPackageManager().getLaunchIntentForPackage(packageName);
 //                    if (intent != null) {

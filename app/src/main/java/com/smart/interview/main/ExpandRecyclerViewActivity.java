@@ -1,4 +1,4 @@
-package com.smart.interview;
+package com.smart.interview.main;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -15,13 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.smart.interview.BaseActivity;
+import com.smart.interview.R;
 import com.smart.interview.view.PartView;
 
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ExpandRecyclerViewActivity extends AppCompatActivity {
+public class ExpandRecyclerViewActivity extends BaseActivity {
 
     private static final int TYPE_TITLE = 0;
     private static final int TYPE_CONTENT = 1;
@@ -32,15 +34,29 @@ public class ExpandRecyclerViewActivity extends AppCompatActivity {
     private static final int SIZE = 16;
     @BindString(R.string.expand_recycleView)
     String mTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expand_rv);
-        ButterKnife.bind(this);
         initData();
         myAdapter = new MyAdapter(this);
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(myAdapter);
+    }
+
+    @Override
+    public int layoutID() {
+        return R.layout.activity_expand_rv;
+    }
+
+    @Override
+    public String title() {
+        return mTitle;
+    }
+
+    @Override
+    public boolean showBackArrow() {
+        return true;
     }
 
     private void initData() {
