@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.smart.interview.R;
+import com.smart.interview.listener.ScreenShotListenManager;
 import com.smart.interview.view.RotateTextView;
 
 
@@ -46,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
         mRV.setLayoutManager(new GridLayoutManager(this, 3));
         mRV.setAdapter(mAdapter);
         setSliderShow();
+    }
+
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 
     private void setSliderShow() {

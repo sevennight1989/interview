@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.smart.interview.service.ListenShotScreenService;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -24,7 +26,12 @@ public class SplashActivity extends BaseActivity {
             return;
         }
         mCountDownTimer.start();
+        startListenScreenService();
+    }
 
+    private void startListenScreenService(){
+        Intent intent = new Intent(this, ListenShotScreenService.class);
+        startService(intent);
     }
 
     @Override
