@@ -4,6 +4,7 @@
         <item>自定义ViewGroup</item>
         <item>IOC框架</item>
         <item>ExpandRecycleView</item>
+        <item>Camera2拍照预览</item>
     </string-array>
 
     <string-array name="slider_text">

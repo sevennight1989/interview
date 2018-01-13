@@ -4,4 +4,24 @@
     <string name="expand_recycleView">ExpandRecycleView</string>
     <string name="cust_view_group">自定义ViewGroup</string>
     <string name="title_activity_base">BaseActivity</string>
+    <string name="camera2_preview">Camera2拍照预览</string>
+    <string name="picture">Picture</string>
+    <string name="description_info">Info</string>
+    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="intro_message">
+        <![CDATA[
+
+
+            This sample demonstrates the basic use of Camera2 API. Check the source code to see how
+            you can display camera preview and take pictures.
+
+
+        ]]>
+    </string>
+
+    <string name="dialog_image_type_title">提示</string>
+    <string name="dialog_image_type_message">请选择拍照图片类型</string>
+    <string name="dialog_image_type_jpg">JPG格式</string>
+    <string name="dialog_image_type_yuv">YUV格式</string>
 </resources>

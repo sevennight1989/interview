@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.smart.interview.R;
-import com.smart.interview.listener.ScreenShotListenManager;
+import com.smart.interview.main.camera.CameraActivity;
 import com.smart.interview.view.RotateTextView;
 
 
@@ -49,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
         mRV.setAdapter(mAdapter);
         setSliderShow();
     }
-
-
 
 
     @Override
@@ -95,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = null;
                     switch (position) {
                         case 0:
-                            intent = new Intent(MainActivity.this,CustViewGroupActivity.class);
+                            intent = new Intent(MainActivity.this, CustViewGroupActivity.class);
 
                             break;
 
@@ -105,8 +102,12 @@ public class MainActivity extends AppCompatActivity {
                         case 2:
                             intent = new Intent(MainActivity.this, ExpandRecyclerViewActivity.class);
                             break;
+
+                        case 3:
+                            intent = new Intent(MainActivity.this, CameraActivity.class);
+                            break;
                     }
-                    if(intent != null){
+                    if (intent != null) {
                         startActivity(intent);
                     }
 
