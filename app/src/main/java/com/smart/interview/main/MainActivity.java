@@ -16,6 +16,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.smart.interview.R;
+import com.smart.interview.aop.Permission;
 import com.smart.interview.main.camera.CameraActivity;
 import com.smart.interview.view.RotateTextView;
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private ItemListAdapter mAdapter;
 
     @Override
+    @Permission(value = "checck",type = 0)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
