@@ -108,6 +108,14 @@ public class MainActivity extends AppCompatActivity {
                         case 3:
                             intent = new Intent(MainActivity.this, CameraActivity.class);
                             break;
+
+                        case 4:
+                            intent = new Intent(MainActivity.this,RxJavaTestActivity.class);
+                            break;
+
+                        case 5:
+                            intent = new Intent(MainActivity.this,StorageTestActivity.class);
+                            break;
                     }
                     if (intent != null) {
                         startActivity(intent);

@@ -5,6 +5,8 @@
         <item>IOC框架</item>
         <item>ExpandRecycleView</item>
         <item>Camera2拍照预览</item>
+        <item>RxJava使用</item>
+        <item>存储使用</item>
     </string-array>
 
     <string-array name="slider_text">

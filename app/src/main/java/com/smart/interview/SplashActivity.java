@@ -15,7 +15,7 @@ public class SplashActivity extends BaseActivity {
 
     @BindView(R.id.splash_content)
     TextView mContentTv;
-    private static final long DELAY = 4;
+    private static final long DELAY = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
