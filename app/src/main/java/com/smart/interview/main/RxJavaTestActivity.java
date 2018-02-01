@@ -5,23 +5,46 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.smart.interview.BaseActivity;
 import com.smart.interview.R;
 
 import java.io.File;
 
+import butterknife.BindString;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-public class RxJavaTestActivity extends AppCompatActivity {
+public class RxJavaTestActivity extends BaseActivity {
 
+    @BindString(R.string.rxjava_use)
+    String mTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rx_java_test);
         test001();
+    }
+
+    @Override
+    public boolean showActionBar() {
+        return true;
+    }
+
+    @Override
+    public int layoutID() {
+        return R.layout.activity_rx_java_test;
+    }
+
+    @Override
+    public String title() {
+        return mTitle;
+    }
+
+    @Override
+    public boolean showBackArrow() {
+        return true;
     }
 
     private void test001() {
