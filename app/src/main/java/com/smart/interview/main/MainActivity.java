@@ -116,6 +116,9 @@ public class MainActivity extends AppCompatActivity {
                         case 5:
                             intent = new Intent(MainActivity.this,StorageTestActivity.class);
                             break;
+
+                        case 6:
+                            intent = new Intent(MainActivity.this,QueueAndThreadActivity.class);
                     }
                     if (intent != null) {
                         startActivity(intent);

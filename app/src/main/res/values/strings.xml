@@ -24,4 +24,5 @@
     <string name="dialog_image_type_message">请选择拍照图片类型</string>
     <string name="dialog_image_type_jpg">JPG格式</string>
     <string name="dialog_image_type_yuv">YUV格式</string>
+    <string name="queue_and_thread">队列和线程的使用</string>
 </resources>
