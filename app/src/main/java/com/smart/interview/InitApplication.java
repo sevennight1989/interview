@@ -1,6 +1,8 @@
 package com.smart.interview;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.blankj.utilcode.util.Utils;
 
@@ -13,5 +15,11 @@ public class InitApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Utils.init(this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }

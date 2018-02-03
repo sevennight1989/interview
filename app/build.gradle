@@ -11,6 +11,7 @@ android {
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         externalNativeBuild {
             cmake {
                 cppFlags "-fexceptions"
@@ -38,6 +39,18 @@ android {
             path "CMakeLists.txt"
         }
     }
+
+    afterEvaluate {
+        tasks.matching {
+            it.name.startsWith('dex')
+        }.each { dx ->
+            if (dx.additionalParameters == null) {
+                dx.additionalParameters = ['--multi-dex']
+            } else {
+                dx.additionalParameters += '--multi-dex'
+            }
+        }
+    }
 }
 
 dependencies {
@@ -62,7 +75,7 @@ dependencies {
     compile 'org.aspectj:aspectjrt:1.8.9'
     compile 'io.reactivex:rxjava:1.0.14'
     compile 'io.reactivex:rxandroid:1.0.1'
-
+    compile 'com.android.support:multidex:1.0.2'
 }
 
 final def log = project.logger
