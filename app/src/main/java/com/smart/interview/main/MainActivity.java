@@ -18,6 +18,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.smart.interview.R;
 import com.smart.interview.aop.Permission;
 import com.smart.interview.main.camera.CameraActivity;
+import com.smart.interview.main.explorer.FileExplorerActivity;
 import com.smart.interview.view.RotateTextView;
 
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private ItemListAdapter mAdapter;
 
     @Override
-    @Permission(value = "checck",type = 0)
+    @Permission(value = "checck", type = 0)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
@@ -110,15 +111,20 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case 4:
-                            intent = new Intent(MainActivity.this,RxJavaTestActivity.class);
+                            intent = new Intent(MainActivity.this, RxJavaTestActivity.class);
                             break;
 
                         case 5:
-                            intent = new Intent(MainActivity.this,StorageTestActivity.class);
+                            intent = new Intent(MainActivity.this, StorageTestActivity.class);
                             break;
 
                         case 6:
-                            intent = new Intent(MainActivity.this,QueueAndThreadActivity.class);
+                            intent = new Intent(MainActivity.this, QueueAndThreadActivity.class);
+                            break;
+
+                        case 7:
+                            intent = makeLaunchIntent(FileExplorerActivity.class);
+                            break;
                     }
                     if (intent != null) {
                         startActivity(intent);
@@ -138,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+        }
+
+        private Intent makeLaunchIntent(Class clazz) {
+            return new Intent(MainActivity.this, clazz);
         }
 
         @Override

@@ -59,7 +59,8 @@
 
         <activity android:name=".main.RxJavaTestActivity" />
         <activity android:name=".main.StorageTestActivity" />
-        <activity android:name=".main.QueueAndThreadActivity"></activity>
+        <activity android:name=".main.QueueAndThreadActivity" />
+        <activity android:name=".main.explorer.FileExplorerActivity"></activity>
     </application>
 
 </manifest>

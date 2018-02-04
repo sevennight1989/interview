@@ -34,4 +34,7 @@
     <string name="add_file">添加文件</string>
     <string name="list_file">打印文件</string>
     <string name="delete_file">删除文件</string>
+    <string name="file_explorer">文件浏览器</string>
+    <string name="type_file">文件</string>
+    <string name="type_folder">文件夹</string>
 </resources>
