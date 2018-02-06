@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -170,7 +171,7 @@ public class FileExplorerActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(FileViewHolder holder, int position) {
-            ItemBean itemBean = itemBeanList.get(position);
+            final ItemBean itemBean = itemBeanList.get(position);
             holder.nameTv.setText(itemBean.getName());
             holder.typeTv.setText(itemBean.getFileTypeName());
             switch (itemBean.getFileType()) {
@@ -182,6 +183,16 @@ public class FileExplorerActivity extends BaseActivity {
                     holder.fileHeadView.setBackgroundResource(R.drawable.file);
                     break;
             }
+            holder.mFileTimeLy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemBean.getFileType() == FOLDER) {
+                        mCurrentPath = mCurrentPath + File.separator + itemBean.getName();
+                        toNext();
+                    }
+
+                }
+            });
         }
 
         @Override
@@ -196,6 +207,8 @@ public class FileExplorerActivity extends BaseActivity {
             TextView nameTv;
             @BindView(R.id.type)
             TextView typeTv;
+            @BindView(R.id.file_item)
+            RelativeLayout mFileTimeLy;
 
             public FileViewHolder(View itemView) {
                 super(itemView);
@@ -233,13 +246,13 @@ public class FileExplorerActivity extends BaseActivity {
 
     //返回上一个层级
     private void backToPre() {
-        mAdapter.notifyDataSetChanged();
-        mRv.scrollToPosition(stack.pop().getPosition());
+//        mAdapter.notifyDataSetChanged();
+//        mRv.scrollToPosition(stack.pop().getPosition());
     }
 
     //进入下一层级
     private void toNext() {
-
+        listFiles(mCurrentPath);
     }
 
     @Override
