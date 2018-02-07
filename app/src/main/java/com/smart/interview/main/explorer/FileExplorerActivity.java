@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.os.FileObserver;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -41,7 +42,7 @@ public class FileExplorerActivity extends BaseActivity {
     //存放当前页面展示的文件列表
     private List<ItemBean> itemBeanList;
     //存放每个页面的任务栈，包含路径，滑动的位置
-    private Stack<PageInfoBean> stack;
+    private Stack<Integer> stack;
 
     @BindString(R.string.file_explorer)
     String mTitle;
@@ -53,6 +54,8 @@ public class FileExplorerActivity extends BaseActivity {
     boolean isTop = true;
     private String mCurrentPath;
     String rootPath = Environment.getExternalStorageDirectory().getPath();
+    private int mCurrentPosition = 0;
+    private LinearLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,29 +74,45 @@ public class FileExplorerActivity extends BaseActivity {
         stack = new Stack<>();
     }
 
-    private int lastPosition = 0;
-    private int lastOffset = 0;
 
     private void initView() {
         mAdapter = new FileRecyclerViewAdapter(this);
-        mRv.setLayoutManager(new LinearLayoutManager(this));
+        layoutManager = new LinearLayoutManager(this);
+        mRv.setLayoutManager(layoutManager);
         mRv.setAdapter(mAdapter);
-        mRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRv.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                View topView = recyclerView.getLayoutManager().getChildAt(0);
-                lastOffset = topView.getTop();
-                lastPosition = recyclerView.getLayoutManager().getPosition(topView);
+                super.onScrollStateChanged(recyclerView, newState);
+                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                if (layoutManager instanceof LinearLayoutManager) {
+                    LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
+                    //获取第一个可见view的位置
+                    mCurrentPosition = linearManager.findLastVisibleItemPosition();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
             }
         });
     }
 
     private void initData() {
-        listFiles(mCurrentPath);
+        listFiles(mCurrentPath, mCurrentPosition);
     }
 
     private void listFiles(String path) {
+        listFiles(path, 0, false);
+    }
 
+    private void listFiles(String path, final int position) {
+        listFiles(path, position, true);
+
+    }
+
+    private void listFiles(final String path, final int position, final boolean scroll) {
         if (itemBeanList != null && itemBeanList.size() > 0) {
             itemBeanList.clear();
         }
@@ -127,6 +146,9 @@ public class FileExplorerActivity extends BaseActivity {
 
             @Override
             public void onCompleted() {
+                if (scroll) {
+                    layoutManager.scrollToPosition(position);
+                }
                 mAdapter.notifyDataSetChanged();
                 LogUtils.v("加载文件完成");
             }
@@ -141,8 +163,6 @@ public class FileExplorerActivity extends BaseActivity {
 
             }
         });
-
-
     }
 
 
@@ -198,10 +218,8 @@ public class FileExplorerActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     if (itemBean.getFileType() == FOLDER) {
-                        mCurrentPath = mCurrentPath + File.separator + itemBean.getName();
-                        toNext();
+                        toNext(itemBean.getName());
                     }
-
                 }
             });
         }
@@ -221,7 +239,7 @@ public class FileExplorerActivity extends BaseActivity {
             @BindView(R.id.file_item)
             RelativeLayout mFileTimeLy;
 
-            public FileViewHolder(View itemView) {
+            FileViewHolder(View itemView) {
                 super(itemView);
                 ButterKnife.bind(this, itemView);
             }
@@ -257,13 +275,21 @@ public class FileExplorerActivity extends BaseActivity {
 
     //返回上一个层级
     private void backToPre() {
-//        mAdapter.notifyDataSetChanged();
-//        mRv.scrollToPosition(stack.pop().getPosition());
+        mCurrentPath = new File(mCurrentPath).getParent();
+        if (TextUtils.equals(mCurrentPath, rootPath)) {
+            isTop = true;
+        }
+        mCurrentPosition = stack.pop();
+        LogUtils.v("backToPre " + mCurrentPosition);
+        listFiles(mCurrentPath, mCurrentPosition);
     }
 
     //进入下一层级
-    private void toNext() {
-        LogUtils.v(lastOffset +"  " + lastPosition);
+    private void toNext(String folderName) {
+        mCurrentPath = mCurrentPath + File.separator + folderName;
+        isTop = false;
+        LogUtils.v("toNext " + mCurrentPosition);
+        stack.push(mCurrentPosition);
         listFiles(mCurrentPath);
     }
 
