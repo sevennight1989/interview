@@ -16,12 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.google.common.collect.Lists;
 import com.smart.interview.BaseActivity;
 import com.smart.interview.R;
 
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -66,15 +66,26 @@ public class FileExplorerActivity extends BaseActivity {
 
     //初始化数据源载体
     private void initBase() {
-        itemBeanList = new ArrayList<>();
+        itemBeanList = Lists.newArrayList();
         mCurrentPath = rootPath;
         stack = new Stack<>();
     }
+
+    private int lastPosition = 0;
+    private int lastOffset = 0;
 
     private void initView() {
         mAdapter = new FileRecyclerViewAdapter(this);
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(mAdapter);
+        mRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                View topView = recyclerView.getLayoutManager().getChildAt(0);
+                lastOffset = topView.getTop();
+                lastPosition = recyclerView.getLayoutManager().getPosition(topView);
+            }
+        });
     }
 
     private void initData() {
@@ -252,6 +263,7 @@ public class FileExplorerActivity extends BaseActivity {
 
     //进入下一层级
     private void toNext() {
+        LogUtils.v(lastOffset +"  " + lastPosition);
         listFiles(mCurrentPath);
     }
 
