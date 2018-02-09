@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.FileObserver;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -42,7 +43,7 @@ public class FileExplorerActivity extends BaseActivity {
     //存放当前页面展示的文件列表
     private List<ItemBean> itemBeanList;
     //存放每个页面的任务栈，包含路径，滑动的位置
-    private Stack<Integer> stack;
+    private Stack<int[]> stack;
 
     @BindString(R.string.file_explorer)
     String mTitle;
@@ -54,7 +55,8 @@ public class FileExplorerActivity extends BaseActivity {
     boolean isTop = true;
     private String mCurrentPath;
     String rootPath = Environment.getExternalStorageDirectory().getPath();
-    private int mCurrentPosition = 0;
+    //当前位置包括位置和偏移
+    private int[] curPos = new int[2];
     private LinearLayoutManager layoutManager;
 
     @Override
@@ -72,6 +74,8 @@ public class FileExplorerActivity extends BaseActivity {
         itemBeanList = Lists.newArrayList();
         mCurrentPath = rootPath;
         stack = new Stack<>();
+        curPos[0] = 0;
+        curPos[1] = 0;
     }
 
 
@@ -80,39 +84,25 @@ public class FileExplorerActivity extends BaseActivity {
         layoutManager = new LinearLayoutManager(this);
         mRv.setLayoutManager(layoutManager);
         mRv.setAdapter(mAdapter);
-        mRv.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-                if (layoutManager instanceof LinearLayoutManager) {
-                    LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
-                    //获取第一个可见view的位置
-                    mCurrentPosition = linearManager.findLastVisibleItemPosition();
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
     }
 
     private void initData() {
-        listFiles(mCurrentPath, mCurrentPosition);
+        listFiles(mCurrentPath, curPos);
     }
 
     private void listFiles(String path) {
-        listFiles(path, 0, false);
+        int[] pos = new int[2];
+        pos[0] = 0;
+        pos[1] = 0;
+        listFiles(path, pos, false);
     }
 
-    private void listFiles(String path, final int position) {
-        listFiles(path, position, true);
+    private void listFiles(String path, final int[] pos) {
+        listFiles(path, pos, true);
 
     }
 
-    private void listFiles(final String path, final int position, final boolean scroll) {
+    private void listFiles(final String path, final int[] pos, final boolean scroll) {
         if (itemBeanList != null && itemBeanList.size() > 0) {
             itemBeanList.clear();
         }
@@ -147,7 +137,7 @@ public class FileExplorerActivity extends BaseActivity {
             @Override
             public void onCompleted() {
                 if (scroll) {
-                    layoutManager.scrollToPosition(position);
+                    layoutManager.scrollToPositionWithOffset(pos[0], pos[1]);
                 }
                 mAdapter.notifyDataSetChanged();
                 LogUtils.v("加载文件完成");
@@ -279,18 +269,41 @@ public class FileExplorerActivity extends BaseActivity {
         if (TextUtils.equals(mCurrentPath, rootPath)) {
             isTop = true;
         }
-        mCurrentPosition = stack.pop();
-        LogUtils.v("backToPre " + mCurrentPosition);
-        listFiles(mCurrentPath, mCurrentPosition);
+        curPos = stack.pop();
+        listFiles(mCurrentPath, curPos);
     }
 
     //进入下一层级
     private void toNext(String folderName) {
         mCurrentPath = mCurrentPath + File.separator + folderName;
         isTop = false;
-        LogUtils.v("toNext " + mCurrentPosition);
-        stack.push(mCurrentPosition);
+        stack.push(getRecyclerViewLastPosition(layoutManager));
         listFiles(mCurrentPath);
+    }
+
+    //获得RecyclerView最后的位置
+    private int[] getRecyclerViewLastPosition(LinearLayoutManager layoutManager) {
+        int[] pos = new int[2];
+        pos[0] = layoutManager.findFirstCompletelyVisibleItemPosition();
+        OrientationHelper orientationHelper = OrientationHelper.createOrientationHelper(layoutManager, OrientationHelper.VERTICAL);
+        int fromIndex = 0;
+        int toIndex = itemBeanList.size();
+        final int start = orientationHelper.getStartAfterPadding();
+        final int end = orientationHelper.getEndAfterPadding();
+        final int next = toIndex > fromIndex ? 1 : -1;
+        for (int i = fromIndex; i != toIndex; i += next) {
+            final View child = mRv.getChildAt(i);
+            final int childStart = orientationHelper.getDecoratedStart(child);
+            final int childEnd = orientationHelper.getDecoratedEnd(child);
+            if (childStart < end && childEnd > start) {
+                if (childStart >= start && childEnd <= end) {
+                    pos[1] = childStart;
+                    LogUtils.v("position = " + pos[0] + " off = " + pos[1]);
+                    return pos;
+                }
+            }
+        }
+        return pos;
     }
 
     @Override
