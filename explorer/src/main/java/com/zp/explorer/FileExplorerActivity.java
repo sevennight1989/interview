@@ -64,7 +64,7 @@ public class FileExplorerActivity extends BaseActivity {
         initBase();
         initData();
         initView();
-        mFileObserver = new SDCardFileObserver(Environment.getExternalStorageDirectory().getPath());
+        mFileObserver = new SDCardFileObserver(mCurrentPath);
         mFileObserver.startWatching();
     }
 

@@ -1,4 +1,3 @@
-
 apply plugin: 'com.android.application'
 //在依赖module中使用butterknife需要添加
 apply plugin: 'com.jakewharton.butterknife'
@@ -59,7 +58,9 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':commonlibrary')
-    implementation project(':explorer')
+    if (isModule.toBoolean()) {
+        implementation project(':explorer')
+    }
     //在依赖module中使用butterknife需要添加
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
