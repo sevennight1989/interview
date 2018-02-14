@@ -43,7 +43,7 @@ public class FileExplorerActivity extends BaseActivity {
     private List<ItemBean> itemBeanList;
     //存放每个页面的任务栈，包含路径，滑动的位置
     private Stack<int[]> stack;
-
+    //module中需要使用R2
     @BindString(R2.string.file_explorer)
     String mTitle;
     @BindView(R2.id.rv_fileList)
