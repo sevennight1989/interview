@@ -1,4 +1,4 @@
-package com.smart.interview.main.explorer;
+package com.zp.explorer;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -97,7 +97,7 @@ public class ItemBean implements Parcelable {
         this.fileTypeName = in.readString();
     }
 
-    public static final Parcelable.Creator<ItemBean> CREATOR = new Parcelable.Creator<ItemBean>() {
+    public static final Creator<ItemBean> CREATOR = new Creator<ItemBean>() {
         @Override
         public ItemBean createFromParcel(Parcel source) {
             return new ItemBean(source);

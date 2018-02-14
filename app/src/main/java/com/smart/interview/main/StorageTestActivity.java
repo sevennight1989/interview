@@ -3,15 +3,13 @@ package com.smart.interview.main;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.smart.interview.BaseActivity;
 import com.smart.interview.R;
+import com.zp.commonlibrary.BaseActivity;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 

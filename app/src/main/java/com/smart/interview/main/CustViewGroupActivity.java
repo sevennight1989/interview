@@ -3,8 +3,8 @@ package com.smart.interview.main;
 
 import android.os.Bundle;
 
-import com.smart.interview.BaseActivity;
 import com.smart.interview.R;
+import com.zp.commonlibrary.BaseActivity;
 
 import butterknife.BindString;
 

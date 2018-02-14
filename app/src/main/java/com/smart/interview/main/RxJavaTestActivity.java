@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.smart.interview.BaseActivity;
 import com.smart.interview.R;
+import com.zp.commonlibrary.BaseActivity;
 
 import java.io.File;
 

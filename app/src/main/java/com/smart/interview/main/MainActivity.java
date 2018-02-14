@@ -18,8 +18,8 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.smart.interview.R;
 import com.smart.interview.aop.Permission;
 import com.smart.interview.main.camera.CameraActivity;
-import com.smart.interview.main.explorer.FileExplorerActivity;
 import com.smart.interview.view.RotateTextView;
+import com.zp.explorer.FileExplorerActivity;
 
 
 import butterknife.BindArray;

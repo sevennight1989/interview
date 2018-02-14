@@ -2,14 +2,13 @@ package com.smart.interview;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.smart.interview.service.ListenShotScreenService;
+import com.zp.commonlibrary.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SplashActivity extends BaseActivity {
 

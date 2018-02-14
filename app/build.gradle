@@ -1,9 +1,6 @@
-if (isModule.toBoolean()) {
-    apply plugin: 'com.android.library'
-} else {
-    apply plugin: 'com.android.application'
-}
 
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
 import org.aspectj.bridge.IMessage
 import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
@@ -59,8 +56,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':commonlibrary')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':commonlibrary')
+    implementation project(':explorer')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
 
 final def log = project.logger

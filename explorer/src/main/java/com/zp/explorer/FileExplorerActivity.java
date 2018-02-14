@@ -1,4 +1,4 @@
-package com.smart.interview.main.explorer;
+package com.zp.explorer;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,9 +19,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.google.common.collect.Lists;
-import com.smart.interview.BaseActivity;
-import com.smart.interview.R;
-
+import com.zp.commonlibrary.BaseActivity;
 
 import java.io.File;
 import java.util.List;
@@ -36,7 +34,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-import static com.smart.interview.main.explorer.FileType.FOLDER;
+import static com.zp.explorer.FileType.FOLDER;
+
 
 public class FileExplorerActivity extends BaseActivity {
 
@@ -45,9 +44,9 @@ public class FileExplorerActivity extends BaseActivity {
     //存放每个页面的任务栈，包含路径，滑动的位置
     private Stack<int[]> stack;
 
-    @BindString(R.string.file_explorer)
+    @BindString(R2.string.file_explorer)
     String mTitle;
-    @BindView(R.id.rv_fileList)
+    @BindView(R2.id.rv_fileList)
     RecyclerView mRv;
     private FileRecyclerViewAdapter mAdapter;
     private SDCardFileObserver mFileObserver;
@@ -220,13 +219,13 @@ public class FileExplorerActivity extends BaseActivity {
         }
 
         class FileViewHolder extends RecyclerView.ViewHolder {
-            @BindView(R.id.file_head)
+            @BindView(R2.id.file_head)
             ImageView fileHeadView;
-            @BindView(R.id.name)
+            @BindView(R2.id.name)
             TextView nameTv;
-            @BindView(R.id.type)
+            @BindView(R2.id.type)
             TextView typeTv;
-            @BindView(R.id.file_item)
+            @BindView(R2.id.file_item)
             RelativeLayout mFileTimeLy;
 
             FileViewHolder(View itemView) {
