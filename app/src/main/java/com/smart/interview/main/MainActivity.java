@@ -125,6 +125,9 @@ public class MainActivity extends AppCompatActivity {
                         case 7:
                             intent = makeLaunchIntent(FileExplorerActivity.class);
                             break;
+
+                        case 8:
+                            intent = makeLaunchIntent(ThreadTestActivity.class);
                     }
                     if (intent != null) {
                         startActivity(intent);

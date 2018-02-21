@@ -9,6 +9,7 @@
         <item>存储使用</item>
         <item>线程和队列组合</item>
         <item>文件浏览器</item>
+        <item>ThreadLocal的使用</item>
     </string-array>
 
     <string-array name="slider_text">

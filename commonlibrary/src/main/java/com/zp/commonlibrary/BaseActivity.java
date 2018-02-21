@@ -1,6 +1,10 @@
 package com.zp.commonlibrary;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.StringDef;
+import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -42,7 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public abstract int layoutID();
+    public abstract @LayoutRes int layoutID();
 
     public abstract String title();
 
