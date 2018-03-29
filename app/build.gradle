@@ -60,9 +60,11 @@ dependencies {
     api project(':commonlibrary')
     if (isModule.toBoolean()) {
         implementation project(':explorer')
+        implementation project(':news')
     }
     //在依赖module中使用butterknife需要添加
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
 }
 
 final def log = project.logger

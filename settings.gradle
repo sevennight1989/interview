@@ -1,1 +1,1 @@
-include ':app', ':commonlibrary', ':explorer'
+include ':app', ':commonlibrary', ':explorer', ':news'

@@ -26,6 +26,7 @@ import butterknife.BindArray;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ll.news.NewListActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -128,6 +129,11 @@ public class MainActivity extends AppCompatActivity {
 
                         case 8:
                             intent = makeLaunchIntent(ThreadTestActivity.class);
+                            break;
+
+                        case 9:
+                            intent = makeLaunchIntent(NewListActivity.class);
+                            break;
                     }
                     if (intent != null) {
                         startActivity(intent);
