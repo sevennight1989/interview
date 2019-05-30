@@ -9,11 +9,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.smart.interview.R;
 import com.smart.interview.listener.ScreenShotListenManager;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -76,7 +75,7 @@ public class ListenShotScreenService extends Service {
             Log.d("PengLog","图片不存在");
             return;
         }
-        Picasso.with(this).load(file).into(imageView);
+        Glide.with(this).load(file).into(imageView);
         // 添加点击事件
         imageView.setOnClickListener(new View.OnClickListener() {
 

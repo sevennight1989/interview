@@ -11,6 +11,7 @@
         <item>文件浏览器</item>
         <item>ThreadLocal的使用</item>
         <item>新闻列表</item>
+        <item>二维码扫描和生成</item>
     </string-array>
 
     <string-array name="slider_text">

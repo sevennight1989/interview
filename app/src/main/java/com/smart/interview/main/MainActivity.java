@@ -1,23 +1,32 @@
 package com.smart.interview.main;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.ConvertUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.smart.interview.NetStatus;
 import com.smart.interview.R;
 import com.smart.interview.aop.Permission;
+import com.smart.interview.aop.PermissionAdvice;
 import com.smart.interview.main.camera.CameraActivity;
+import com.smart.interview.main.camera.CodeActivity;
 import com.smart.interview.view.RotateTextView;
 import com.zp.explorer.FileExplorerActivity;
 
@@ -41,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private ItemListAdapter mAdapter;
 
     @Override
-    @Permission(value = "checck", type = 0)
+//    @Permission(value = "checck", type = 0)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
@@ -51,7 +60,12 @@ public class MainActivity extends AppCompatActivity {
         mRV.setLayoutManager(new GridLayoutManager(this, 3));
         mRV.setAdapter(mAdapter);
         setSliderShow();
+//        boolean ret = Net.getNetStatus();
+//        ToastUtils.showShort("网络连接 " + ret);
     }
+
+
+
 
 
     @Override
@@ -97,10 +111,11 @@ public class MainActivity extends AppCompatActivity {
                     switch (position) {
                         case 0:
                             intent = new Intent(MainActivity.this, CustViewGroupActivity.class);
-
+                            PermissionAdvice.INTERRUPT  = true;
                             break;
 
                         case 1:
+                            PermissionAdvice.INTERRUPT  = false;
                             break;
 
                         case 2:
@@ -134,7 +149,13 @@ public class MainActivity extends AppCompatActivity {
                         case 9:
                             intent = makeLaunchIntent(NewListActivity.class);
                             break;
+
+                        case 10:
+                            intent = makeLaunchIntent(CodeActivity.class);
+                            break;
                     }
+                    int ret = NetStatus.getNetStatus(MainActivity.this);
+                    ToastUtils.showShort("网络状态 " + ret);
                     if (intent != null) {
                         startActivity(intent);
                     }
